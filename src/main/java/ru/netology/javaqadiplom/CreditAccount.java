@@ -16,6 +16,11 @@ public class CreditAccount extends Account {
      * @param creditLimit - неотрицательное число, максимальная сумма которую можно задолжать банку
      * @param rate - неотрицательное число, ставка кредитования для расчёта долга за отрицательный баланс
      */
+    /*
+    2. Проверка что creditLimit - положительное число, иначе throw new IllegalArgumentException(
+                    "Лимит кредита не может быть отрицательным, а у вас: " + creditLimit
+            );
+    */
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
         if (rate <= 0) {
             throw new IllegalArgumentException(

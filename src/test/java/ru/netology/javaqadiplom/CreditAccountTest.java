@@ -40,4 +40,67 @@ public class CreditAccountTest {
             Account account1 = new CreditAccount(100, 500, -10);
         });
     }
+
+    @Test
+    public void ShouldPay() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        acc.pay(600);
+
+        int actual = acc.getBalance();
+        int expected = -500;
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void ShouldPayBoolean() {
+        CreditAccount acc = new CreditAccount(100, 500, 10);
+
+        boolean expected = true;
+
+        boolean actual = acc.pay(200);
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void PayIfAmountMoreThanLimit() {
+        CreditAccount acc = new CreditAccount(100,1000,10);
+
+        acc.pay(2000);
+
+        int expected = 100;
+        int actual = acc.getBalance();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void PayBooleanIfAmountMoreThanLimit() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        Assertions.assertEquals(false, acc.pay(2000));
+    }
+
+    @Test
+    public void PayIfAmountEqualsLimit() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        acc.pay(1100);
+
+        Assertions.assertEquals(-1000, acc.getBalance());
+
+    }
+    @Test
+    public void PayBooleanIfAmountEqualsLimit() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        Assertions.assertEquals(true, acc.pay(1100));
+
+    }
 }
+
+

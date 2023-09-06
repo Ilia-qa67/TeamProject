@@ -16,11 +16,9 @@ public class CreditAccount extends Account {
      * @param creditLimit - неотрицательное число, максимальная сумма которую можно задолжать банку
      * @param rate - неотрицательное число, ставка кредитования для расчёта долга за отрицательный баланс
      */
-    /*
-    2. Проверка что creditLimit - положительное число, иначе throw new IllegalArgumentException(
-                    "Лимит кредита не может быть отрицательным, а у вас: " + creditLimit
-            );
-    */
+    /*Метод Pay всегда возвращает False из-за строчки в Account
+    * Метод Pay неправильно считает Balance*/
+
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
         if (rate <= 0) {
             throw new IllegalArgumentException(
@@ -41,6 +39,14 @@ public class CreditAccount extends Account {
      * @param amount - сумма покупки
      * @return true если операция прошла успешно, false иначе.
      */
+    /*1. В методе Pay переменной balance присваивается новое значение без проверки на превышение кредитного лимита
+    *       В методе Pay присваивание нового значения переменной balance происходит до проверки на превышение кредитного лимита
+    * 2. Метод Pay присваивает перемнной balance отрицательное значение суммы покупки
+    *       Метод Pay присваивает перемнной balance отрицательное значение суммы покупки, что приводит к неправильной работе метода в случаях, когда initialBalance изначально не равен нулю
+    * 3. Метод Pay возвращает false при максимально возможной покупке
+    *       Метод Pay возвращает false при максимально возможной покупке
+    *
+     *  */
     @Override
     public boolean pay(int amount) {
         if (amount <= 0) {

@@ -55,6 +55,14 @@ public class CreditAccountTest {
     }
 
     @Test
+    public void PayIfAmountNegative() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        Assertions.assertEquals(false, acc.pay(-600));
+
+    }
+
+    @Test
     public void ShouldPayBoolean() {
         CreditAccount acc = new CreditAccount(100, 500, 10);
 
@@ -101,6 +109,39 @@ public class CreditAccountTest {
         Assertions.assertEquals(true, acc.pay(1100));
 
     }
+
+    @Test
+    public void ShouldAdd() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        acc.add(500);
+
+        Assertions.assertEquals(600, acc.getBalance());
+    }
+
+    @Test
+    public void AddIfAmountNegative() {
+        CreditAccount acc = new CreditAccount(100,1000,10 );
+
+        Assertions.assertEquals(false, acc.add(-100));
+    }
+
+    @Test
+    public void ShouldYearChange() {
+        CreditAccount acc = new CreditAccount(0,2000,10 );
+
+        acc.pay(1000);
+
+        Assertions.assertEquals(-100, acc.yearChange());
+    }
+
+    @Test
+    public void ShouldYearChangeIfBalanceIsPositive() {
+        CreditAccount acc = new CreditAccount(1000,2000,10 );
+
+        Assertions.assertEquals(0, acc.yearChange());
+    }
+
 }
 
 

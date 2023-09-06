@@ -72,6 +72,11 @@ public class CreditAccount extends Account {
      * @param amount
      * @return
      */
+
+    /*
+    * В методе add переменной balance присваивается amount
+    * Метод add присваивает перемнной balance значение параметра amount, что приводит к неправильной работе метода в случаях, когда initialBalance изначально не равен нулю
+    * */
     @Override
     public boolean add(int amount) {
         if (amount <= 0) {
@@ -88,6 +93,10 @@ public class CreditAccount extends Account {
      * Пример: если на счёте -200 рублей, то при ставке 15% ответ должен быть -30.
      * Пример 2: если на счёте 200 рублей, то при любой ставке ответ должен быть 0.
      * @return
+     */
+
+    /*Метод yearChange рассчитывает проценты на положительный баланс
+    Метод yearChange рассчитывает проценты на положительный баланс
      */
     @Override
     public int yearChange() {

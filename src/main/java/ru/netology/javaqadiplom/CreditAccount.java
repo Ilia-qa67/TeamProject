@@ -16,8 +16,6 @@ public class CreditAccount extends Account {
      * @param creditLimit - неотрицательное число, максимальная сумма которую можно задолжать банку
      * @param rate - неотрицательное число, ставка кредитования для расчёта долга за отрицательный баланс
      */
-    /*Метод Pay всегда возвращает False из-за строчки в Account
-    * Метод Pay неправильно считает Balance*/
 
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
         if (rate <= 0) {
@@ -39,14 +37,7 @@ public class CreditAccount extends Account {
      * @param amount - сумма покупки
      * @return true если операция прошла успешно, false иначе.
      */
-    /*1. В методе Pay переменной balance присваивается новое значение без проверки на превышение кредитного лимита
-    *       В методе Pay присваивание нового значения переменной balance происходит до проверки на превышение кредитного лимита
-    * 2. Метод Pay присваивает перемнной balance отрицательное значение суммы покупки
-    *       Метод Pay присваивает перемнной balance отрицательное значение суммы покупки, что приводит к неправильной работе метода в случаях, когда initialBalance изначально не равен нулю
-    * 3. Метод Pay возвращает false при максимально возможной покупке
-    *       Метод Pay возвращает false при максимально возможной покупке
-    *
-     *  */
+
     @Override
     public boolean pay(int amount) {
         if (amount <= 0) {
@@ -73,10 +64,7 @@ public class CreditAccount extends Account {
      * @return
      */
 
-    /*
-    * В методе add переменной balance присваивается amount
-    * Метод add присваивает перемнной balance значение параметра amount, что приводит к неправильной работе метода в случаях, когда initialBalance изначально не равен нулю
-    * */
+
     @Override
     public boolean add(int amount) {
         if (amount <= 0) {
@@ -92,12 +80,9 @@ public class CreditAccount extends Account {
      * числу через отбрасывание дробной части (так и работает целочисленное деление).
      * Пример: если на счёте -200 рублей, то при ставке 15% ответ должен быть -30.
      * Пример 2: если на счёте 200 рублей, то при любой ставке ответ должен быть 0.
-     * @return
+     * @returnпше
      */
 
-    /*Метод yearChange рассчитывает проценты на положительный баланс
-    Метод yearChange рассчитывает проценты на положительный баланс
-     */
     @Override
     public int yearChange() {
         return balance / 100 * rate;

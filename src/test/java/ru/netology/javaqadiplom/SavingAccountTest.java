@@ -8,6 +8,7 @@ public class SavingAccountTest {
     public void CreationSavingAccountWithNegativeInitialBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
+
             Account account = new SavingAccount(-1000, 1000, 10_000, 10);
         });
     }
@@ -41,7 +42,7 @@ public class SavingAccountTest {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
-            Account account = new SavingAccount(2000, 1500, 1750, 10);
+            Account account = new SavingAccount(2000, 2000, 1500, 10);
         });
     }
 
@@ -130,13 +131,13 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void SavingAccAddIfAmountNegative() {
+    public void SavingAccAddedExtraLimit() {
         SavingAccount acc = new SavingAccount(1000, 100, 10_000, 10);
         Assertions.assertEquals(false, acc.add(10_000));
     }
 
     @Test
-    public void SavingAccAddIfAmountEqualsLimit() {
+    public void SavingAccAddedToEqualsLimit() {
         SavingAccount acc = new SavingAccount(1000, 100, 10_000, 10);
 
         Assertions.assertEquals(true, acc.add(9000));
@@ -232,4 +233,5 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(144, acc.yearChange());
     }
+
 }

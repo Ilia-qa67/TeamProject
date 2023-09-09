@@ -16,6 +16,7 @@ public class CreditAccount extends Account {
      * @param creditLimit - неотрицательное число, максимальная сумма которую можно задолжать банку
      * @param rate - неотрицательное число, ставка кредитования для расчёта долга за отрицательный баланс
      */
+
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
         if (rate <= 0) {
             throw new IllegalArgumentException(
@@ -36,6 +37,7 @@ public class CreditAccount extends Account {
      * @param amount - сумма покупки
      * @return true если операция прошла успешно, false иначе.
      */
+
     @Override
     public boolean pay(int amount) {
         if (amount <= 0) {
@@ -61,6 +63,8 @@ public class CreditAccount extends Account {
      * @param amount
      * @return
      */
+
+
     @Override
     public boolean add(int amount) {
         if (amount <= 0) {
@@ -76,8 +80,9 @@ public class CreditAccount extends Account {
      * числу через отбрасывание дробной части (так и работает целочисленное деление).
      * Пример: если на счёте -200 рублей, то при ставке 15% ответ должен быть -30.
      * Пример 2: если на счёте 200 рублей, то при любой ставке ответ должен быть 0.
-     * @return
+     * @returnпше
      */
+
     @Override
     public int yearChange() {
         return balance / 100 * rate;

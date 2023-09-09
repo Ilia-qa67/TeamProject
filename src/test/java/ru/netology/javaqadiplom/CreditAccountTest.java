@@ -80,7 +80,7 @@ public class CreditAccountTest {
 
         acc.pay(2000);
 
-        int expected = 100;
+        int expected = -1900;
         int actual = acc.getBalance();
 
         Assertions.assertEquals(expected, actual);

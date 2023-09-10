@@ -25,6 +25,31 @@ public class SavingAccount extends Account {
               "Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
         }
+        if (minBalance < 0) {
+            throw new IllegalArgumentException(
+                    "Минимальный баланс не может быть отрицательным, а у вас: " + minBalance
+            );
+        }
+        if (maxBalance < 0) {
+            throw new IllegalArgumentException(
+                    "Максимальный баланс не может быть отрицательным, а у вас: " + maxBalance
+            );
+        }
+        if (minBalance > maxBalance) {
+            throw new IllegalArgumentException(
+                    "Минимальный баланс не может быть больше максимального баланса"
+            );
+        }
+        if (initialBalance < minBalance) {
+            throw new IllegalArgumentException(
+                    "Начальный баланс не может быть меньше минимального баланса"
+            );
+        }
+        if (initialBalance > maxBalance) {
+            throw new IllegalArgumentException(
+                    "Начальный баланс не может быть больше максимального баланса"
+            );
+        }
         this.balance = initialBalance;
         this.minBalance = minBalance;
         this.maxBalance = maxBalance;
@@ -45,11 +70,11 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = balance - amount;
-        if (balance > minBalance) {
+        if ((balance - amount) >= minBalance) {
+            balance = balance - amount;
             return true;
         } else {
-            return false;
+            return false;git 
         }
     }
 
@@ -69,8 +94,8 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        if (balance + amount < maxBalance) {
-            balance = amount;
+        if (balance + amount <= maxBalance) {
+            balance = balance + amount;
             return true;
         } else {
             return false;

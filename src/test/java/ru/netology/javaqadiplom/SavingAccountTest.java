@@ -42,6 +42,7 @@ public class SavingAccountTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
             Account account = new SavingAccount(2000, 2000, 1750, 10);
+
         });
     }
 
@@ -104,6 +105,7 @@ public class SavingAccountTest {
     }
 
     @Test
+
     public void ShouldPayBelowBorder() {
         SavingAccount acc = new SavingAccount(1000, 100, 10_000, 10);
 
@@ -145,6 +147,7 @@ public class SavingAccountTest {
     @Test
     public void ShouldAddLessThanMaxBalance() {
         SavingAccount acc = new SavingAccount(
+
                 2_000,
                 1_000,
                 10_000,
@@ -154,6 +157,37 @@ public class SavingAccountTest {
         acc.add(3_000);
 
         Assertions.assertEquals(5_000, acc.getBalance());
+    }
+
+    @Test
+    public void ShouldAddMoreThanMaxBalance() {
+        SavingAccount acc = new SavingAccount(
+
+                2_000,
+                0,
+                10_000,
+                15
+        );
+
+        acc.add(9_000);
+
+        Assertions.assertEquals(2_000, acc.getBalance());
+    }
+
+    @Test
+    public void ShouldAddEqualThenMaxBalance() {
+        SavingAccount acc = new SavingAccount(
+                1_000,
+                1_000,
+                10_000,
+
+                25
+        );
+
+        acc.add(9_000);
+
+        Assertions.assertEquals(10_000, acc.getBalance());
+        
     }
 
     @Test
@@ -182,6 +216,56 @@ public class SavingAccountTest {
         acc.add(9_000);
 
         Assertions.assertEquals(10_000, acc.getBalance());
+    }
+
+    @Test
+    public void ShouldAddZeroToBalance() {
+        SavingAccount acc = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                20
+        );
+
+        acc.add(0);
+
+        Assertions.assertEquals(2_000, acc.getBalance());
+    }
+
+    @Test
+    public void ShouldAddIfAmountNegative() {
+        SavingAccount acc = new SavingAccount(1000, 100, 10_000, 10);
+
+        Assertions.assertEquals(false, acc.add(-500));
+    }
+
+    @Test
+    public void SavingAccShouldYearChange() {
+        SavingAccount acc = new SavingAccount(1000, 100, 10_000, 10);
+        acc.add(1000);
+        Assertions.assertEquals(100, acc.yearChange());
+    }
+
+    @Test
+    public void SavingAccShouldYearChangeInLimit() {
+        SavingAccount acc = new SavingAccount(1500, 100, 10_000, 15);
+
+        Assertions.assertEquals(225, acc.yearChange());
+    }
+
+    @Test
+    public void SavingAccShouldYearChangeInZero() {
+        SavingAccount acc = new SavingAccount(0, 0, 10_000, 10);
+        acc.add(0);
+        Assertions.assertEquals(0, acc.yearChange());
+    }
+
+    @Test
+    public void SavingAccShouldYearChangeInFractional() {
+        SavingAccount acc = new SavingAccount(1234, 100, 10_000, 12);
+
+        Assertions.assertEquals(144, acc.yearChange());
+
     }
 
     @Test

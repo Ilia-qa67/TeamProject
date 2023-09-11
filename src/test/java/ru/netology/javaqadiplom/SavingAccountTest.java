@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SavingAccountTest {
+
     @Test
     public void CreationSavingAccountWithNegativeInitialBalance() {
 
@@ -321,5 +322,4 @@ public class SavingAccountTest {
         SavingAccount acc = new SavingAccount(1000, 100, 10_000, 10);
         Assertions.assertEquals(false, acc.pay(2_000));
     }
-
 }

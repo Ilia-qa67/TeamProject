@@ -74,7 +74,7 @@ public class SavingAccount extends Account {
             balance = balance - amount;
             return true;
         } else {
-            return false;git 
+            return false;
         }
     }
 

@@ -41,7 +41,7 @@ public class SavingAccountTest {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
-            Account account = new SavingAccount(2000, 1500, 1750, 10);
+            Account account = new SavingAccount(2000, 2000, 1750, 10);
         });
     }
 

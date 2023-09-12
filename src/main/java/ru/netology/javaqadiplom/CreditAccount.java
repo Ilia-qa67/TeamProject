@@ -60,12 +60,11 @@ public class CreditAccount extends Account {
             return false;
         }
         balance = balance - amount;
-        if (balance >= -creditLimit) {
+        if (balance >= -creditLimit); {
             return true;
-        } else {
-            return false;
         }
     }
+
 
     /**
      * Операция пополнения карты на указанную сумму.
@@ -96,8 +95,6 @@ public class CreditAccount extends Account {
      * числу через отбрасывание дробной части (так и работает целочисленное деление).
      * Пример: если на счёте -200 рублей, то при ставке 15% ответ должен быть -30.
      * Пример 2: если на счёте 200 рублей, то при любой ставке ответ должен быть 0.
-     *
-     * @returnпше
      */
 
     @Override

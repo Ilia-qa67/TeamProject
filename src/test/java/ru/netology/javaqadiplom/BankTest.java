@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.javaqadiplom.Bank;
 import ru.netology.javaqadiplom.CreditAccount;
 import ru.netology.javaqadiplom.SavingAccount;
+
 public class BankTest {
 
     SavingAccount accountS1 = new SavingAccount(2000, 0, 5000, 10);
@@ -186,7 +187,7 @@ public class BankTest {
 
         bank.transfer(accountC1, accountC2, 4000);
 
-        int expected = 4500;
+        int expected = 500;
         int actual = accountC1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -198,7 +199,7 @@ public class BankTest {
 
         bank.transfer(accountC1, accountC2, 4000);
 
-        int expected = 4500;
+        int expected = 500;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -260,7 +261,7 @@ public class BankTest {
 
         bank.transfer(accountS1, accountC2, 3000);
 
-        int expected = 5000;
+        int expected = 2000;
         int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -272,7 +273,7 @@ public class BankTest {
 
         bank.transfer(accountS1, accountC2, 3000);
 
-        int expected = 3500;
+        int expected = 500;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);

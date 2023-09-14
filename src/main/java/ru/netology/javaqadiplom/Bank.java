@@ -22,11 +22,11 @@ public class Bank {
         if (from.pay(amount)) {
             to.add(amount);
         }
-
         return true;
     }
-
 }
+
+
 
 
 

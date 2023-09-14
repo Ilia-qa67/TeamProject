@@ -6,14 +6,14 @@ import ru.netology.javaqadiplom.SavingAccount;
 
 public class BankTest {
 
-    SavingAccount accountS1 = new SavingAccount(2000, 0, 5000, 10);
-    SavingAccount accountS2 = new SavingAccount(2000, 0, 5000, 10);
-    CreditAccount accountC1 = new CreditAccount(500, 3000, 10);
-    CreditAccount accountC2 = new CreditAccount(500, 3000, 10);
+    SavingAccount accountS1 = new SavingAccount(1000, 0, 3000, 10);
+    SavingAccount accountS2 = new SavingAccount(1500, 1500, 2000, 10);
+    CreditAccount accountC1 = new CreditAccount(500, 2500, 10);
+    CreditAccount accountC2 = new CreditAccount(1000, 3000, 10);
 
 
     @Test
-    public void shouldTransferFromSavingToSavingDecreaseCheckPositive() {
+    public void shouldTransferFromSavingToSavingDecreaseCheckNegative() {
         Bank bank = new Bank();
 
         bank.transfer(accountS1, accountS2, 1000);
@@ -25,12 +25,12 @@ public class BankTest {
     }
 
     @Test
-    public void shouldTransferFromSavingToSavingIncreaseCheckPositive() {
+    public void shouldTransferFromSavingToSavingIncreaseCheckOverMaxLimit() {
         Bank bank = new Bank();
 
         bank.transfer(accountS1, accountS2, 1000);
 
-        int expected = 3000;
+        int expected = 1500;
         int actual = accountS2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -54,19 +54,19 @@ public class BankTest {
 
         bank.transfer(accountC1, accountC2, 1000);
 
-        int expected = 1500;
+        int expected = 2000;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldTransferFromSavingToCreditDecreaseCheckPositive() {
+    public void shouldTransferFromSavingToCreditDecreaseCheckZero() {
         Bank bank = new Bank();
 
         bank.transfer(accountS1, accountC2, 1000);
 
-        int expected = 1000;
+        int expected = 0;
         int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -78,7 +78,7 @@ public class BankTest {
 
         bank.transfer(accountS1, accountC2, 1000);
 
-        int expected = 1500;
+        int expected = 2000;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -90,7 +90,7 @@ public class BankTest {
 
         bank.transfer(accountC1, accountS2, 1000);
 
-        int expected = -500;
+        int expected = 500;
         int actual = accountC1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -102,7 +102,7 @@ public class BankTest {
 
         bank.transfer(accountC1, accountS2, 1000);
 
-        int expected = 3000;
+        int expected = 1500;
         int actual = accountS2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -112,9 +112,9 @@ public class BankTest {
     public void shouldTransferFromSavingToSavingDecreaseOverCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountS1, accountS2, 4000);
+        bank.transfer(accountS1, accountS2, 1000);
 
-        int expected = 2000;
+        int expected = 1000;
         int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -124,9 +124,9 @@ public class BankTest {
     public void shouldTransferFromSavingToSavingIncreaseOverCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountS1, accountS2, 4000);
+        bank.transfer(accountS1, accountS2, 1000);
 
-        int expected = 2000;
+        int expected = 1500;
         int actual = accountS2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -138,31 +138,7 @@ public class BankTest {
 
         bank.transfer(accountS1, accountS2, 0);
 
-        int expected = 2000;
-        int actual = accountS1.getBalance();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldTransferFromSavingToSavingIncreaseZeroCheck() {
-        Bank bank = new Bank();
-
-        bank.transfer(accountS1, accountS2, 0);
-
-        int expected = 2000;
-        int actual = accountS2.getBalance();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldTransferFromSavingToSavingDecreaseNegativeCheck() {
-        Bank bank = new Bank();
-
-        bank.transfer(accountS1, accountS2, -500);
-
-        int expected = 2000;
+        int expected = 1000;
         int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -172,10 +148,10 @@ public class BankTest {
     public void shouldTransferFromSavingToSavingIncreaseNegativeCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountS1, accountS2, -500);
+        bank.transfer(accountS1, accountS2, 1000);
 
-        int expected = 2000;
-        int actual = accountS2.getBalance();
+        int expected = 1000;
+        int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -197,9 +173,9 @@ public class BankTest {
     public void shouldTransferFromCreditToCreditIncreaseOverCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountC2, 4000);
+        bank.transfer(accountC1, accountC2, 3000);
 
-        int expected = 500;
+        int expected = 4000;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -207,10 +183,10 @@ public class BankTest {
 
 
     @Test
-    public void shouldTransferFromCreditToCreditDecreaseZeroCheck() {
+    public void shouldTransferFromCreditToCreditDecreaseExtraCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountC2, 0);
+        bank.transfer(accountC1, accountC2, 3500);
 
         int expected = 500;
         int actual = accountC1.getBalance();
@@ -222,9 +198,9 @@ public class BankTest {
     public void shouldTransferFromCreditToCreditIncreaseZeroCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountC2, 0);
+        bank.transfer(accountC2, accountC1, 0);
 
-        int expected = 500;
+        int expected = 1000;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -235,9 +211,9 @@ public class BankTest {
     public void shouldTransferFromCreditToCreditDecreaseNegativeCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountC2, -500);
+        bank.transfer(accountC1, accountC2, 2500);
 
-        int expected = 500;
+        int expected = -2000;
         int actual = accountC1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -247,9 +223,9 @@ public class BankTest {
     public void shouldTransferFromCreditToCreditIncreaseNegativeCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountC2, -500);
+        bank.transfer(accountC1, accountC2, 2500);
 
-        int expected = 500;
+        int expected = 3500;
         int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -261,20 +237,20 @@ public class BankTest {
 
         bank.transfer(accountS1, accountC2, 3000);
 
-        int expected = 2000;
+        int expected = 1000;
         int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldTransferFromSavingToCreditIncreaseExtraCheck() {
+    public void shouldTransferFromSavingToCreditIncrease() {
         Bank bank = new Bank();
 
         bank.transfer(accountS1, accountC2, 3000);
 
-        int expected = 500;
-        int actual = accountC2.getBalance();
+        int expected = 1000;
+        int actual = accountS1.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -283,9 +259,9 @@ public class BankTest {
     public void shouldTransferFromCreditToSavingDecreaseExtraCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountS2, 3500);
+        bank.transfer(accountC1, accountS2, 500);
 
-        int expected = -3000;
+        int expected = 0;
         int actual = accountC1.getBalance();
 
         Assertions.assertEquals(expected, actual);
@@ -295,10 +271,10 @@ public class BankTest {
     public void shouldTransferFromCreditToSavingIncreaseExtraCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountC1, accountS2, 3500);
+        bank.transfer(accountC1, accountS2, 2500);
 
-        int expected = 2000;
-        int actual = accountS2.getBalance();
+        int expected = 500;
+        int actual = accountC1.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -309,8 +285,8 @@ public class BankTest {
 
         bank.transfer(accountS1, accountC2, 5000);
 
-        int expected = 500;
-        int actual = accountC1.getBalance();
+        int expected = 1000;
+        int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -319,13 +295,50 @@ public class BankTest {
     public void shouldTransferFromSavingToCreditIncreaseOverCheck() {
         Bank bank = new Bank();
 
-        bank.transfer(accountS1, accountC2, 5000);
+        bank.transfer(accountS1, accountC2, 1000);
 
         int expected = 2000;
-        int actual = accountS2.getBalance();
+        int actual = accountC2.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
 
 
+    @Test
+    public void transferFromCreditToCreditIfAmountMoreThanLimit() {
+        Bank bank = new Bank();
+
+        Assertions.assertEquals(false, bank.transfer(accountC1, accountC2, 5000));
+    }
+
+    @Test
+    public void transferFromSavingToSavingIfAmountMoreThanMinBalance() {
+        Bank bank = new Bank();
+
+        Assertions.assertEquals(false, bank.transfer(accountS1, accountS2, 3000));
+
+    }
+
+    @Test
+    public void transferFromSavingToSavingIfAmountMoreThanMaxBalance() {
+        Bank bank = new Bank();
+
+        Assertions.assertEquals(false, bank.transfer(accountS1, accountS2, 1000));
+    }
+
+    @Test
+    public void transferFromSavingToSavingIfAmountMoreThanMaxBalanceOverCheck() {
+        Bank bank = new Bank();
+
+        bank.transfer(accountS1, accountS2, 1000);
+
+        int expected = 1000;
+        int actual = accountS1.getBalance();
+
+        Assertions.assertEquals(expected, actual);
+
+
+    }
+
 }
+

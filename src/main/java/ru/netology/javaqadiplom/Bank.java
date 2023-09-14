@@ -21,6 +21,11 @@ public class Bank {
         }
         if (from.pay(amount)) {
             to.add(amount);
+        } else {
+            if (to.add(amount)) {
+                from.add(amount);
+                return false;
+            }
         }
         return true;
     }

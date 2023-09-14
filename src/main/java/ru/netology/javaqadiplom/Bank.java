@@ -16,15 +16,25 @@ public class Bank {
      */
 
     public boolean transfer(Account from, Account to, int amount) {
+
         if (amount <= 0) {
             return false;
         }
-        if (from.pay(amount)) {
-            to.add(amount);
+        if (from.pay(amount) != true) {
+            return false;
+
+        } else {
+
+            if (to.add(amount) != true) {
+                from.add(amount);
+
+                return false;
+            }
         }
         return true;
     }
 }
+
 
 
 
